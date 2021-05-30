@@ -6,10 +6,12 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.sai.currencyfactor.model.CurrencyConvertRequest;
 import com.sai.currencyfactor.model.CurrencyFactorRequest;
 import com.sai.currencyfactor.model.CurrencyFactorResponse;
 import com.sai.currencyfactor.service.CurrencyFactorService;
@@ -33,6 +35,7 @@ public class CurrencyFactorController {
 			return new ResponseEntity<CurrencyFactorResponse>(cres,HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 	}
+	@PutMapping("/update")
 	public ResponseEntity<CurrencyFactorResponse> updateConversionFactor(@RequestBody CurrencyFactorRequest cfreq){
 		CurrencyFactorResponse cres=new CurrencyFactorResponse();
 		
@@ -53,8 +56,19 @@ public class CurrencyFactorController {
 			return new ResponseEntity<Double>(currfacr,HttpStatus.OK);
 		}catch(Exception e) {
 			return new ResponseEntity<Double>(HttpStatus.INTERNAL_SERVER_ERROR);
-		}
+		}	
 		
+	}
+	@PostMapping("/convertCF")
+	public ResponseEntity<Double> convertCurrencyFactor(@RequestBody CurrencyConvertRequest ccr) {
+		try {
+			double currfacr=service.convertAndGetCurrencyFactor(ccr);
+			
+			return new ResponseEntity<Double>(currfacr,HttpStatus.OK);
+		}catch(Exception e) {
+			return new ResponseEntity<Double>(HttpStatus.INTERNAL_SERVER_ERROR);
+		}	
 		
+		//return cs.convertCurrency(ccr);
 	}
 }
