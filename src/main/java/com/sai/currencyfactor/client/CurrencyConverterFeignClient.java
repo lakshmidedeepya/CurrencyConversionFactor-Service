@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 
 import com.sai.currencyfactor.model.CurrencyConvertRequest;
 
-@FeignClient(name="CurrencyConversion-service",path = "currency")
+@FeignClient(name="CurrencyConversion-service",path = "currency",fallback = CurrencyCnvtrFeignCallback.class)
 public interface CurrencyConverterFeignClient {
 	@PostMapping("convert")
 	public double currencyConverter(@RequestBody CurrencyConvertRequest ccr);
