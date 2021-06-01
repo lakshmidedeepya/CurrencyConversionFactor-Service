@@ -59,16 +59,33 @@ public class CurrencyFactorController {
 		}	
 		
 	}
-	@PostMapping("/convertCF")
-	public ResponseEntity<Double> convertCurrencyFactor(@RequestBody CurrencyConvertRequest ccr) {
+	@PostMapping("/convertCF/v0")
+	public ResponseEntity<Double> convertCurrencyFactorV0(@RequestBody CurrencyConvertRequest ccr) {
 		try {
 			double currfacr=service.convertAndGetCurrencyFactor(ccr);
-			//double currfacr=service.convertAndGetCurrencyFactorV1(ccr);
 			return new ResponseEntity<Double>(currfacr,HttpStatus.OK);
 		}catch(Exception e) {
 			return new ResponseEntity<Double>(HttpStatus.INTERNAL_SERVER_ERROR);
 		}	
-		
-		//return cs.convertCurrency(ccr);
+	}
+	@PostMapping("/convertCF/v1")
+	public ResponseEntity<Double> convertCurrencyFactorV1(@RequestBody CurrencyConvertRequest ccr) {
+		try {
+			//double currfacr=service.convertAndGetCurrencyFactor(ccr);
+			double currfacr=service.convertAndGetCurrencyFactorV1(ccr);
+			return new ResponseEntity<Double>(currfacr,HttpStatus.OK);
+		}catch(Exception e) {
+			return new ResponseEntity<Double>(HttpStatus.INTERNAL_SERVER_ERROR);
+		}	
+	}
+	@PostMapping("/convertCF/v2")
+	public ResponseEntity<Double> convertCurrencyFactorV2(@RequestBody CurrencyConvertRequest ccr) {
+		try {
+			
+			double currfacr=service.convertAndGetCurrencyFactorV2(ccr);
+			return new ResponseEntity<Double>(currfacr,HttpStatus.OK);
+		}catch(Exception e) {
+			return new ResponseEntity<Double>(HttpStatus.INTERNAL_SERVER_ERROR);
+		}	
 	}
 }
