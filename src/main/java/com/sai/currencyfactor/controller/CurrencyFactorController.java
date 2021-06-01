@@ -62,8 +62,8 @@ public class CurrencyFactorController {
 	@PostMapping("/convertCF")
 	public ResponseEntity<Double> convertCurrencyFactor(@RequestBody CurrencyConvertRequest ccr) {
 		try {
-			double currfacr=service.convertAndGetCurrencyFactor(ccr);
-			
+			//double currfacr=service.convertAndGetCurrencyFactor(ccr);
+			double currfacr=service.convertAndGetCurrencyFactorV1(ccr);
 			return new ResponseEntity<Double>(currfacr,HttpStatus.OK);
 		}catch(Exception e) {
 			return new ResponseEntity<Double>(HttpStatus.INTERNAL_SERVER_ERROR);
