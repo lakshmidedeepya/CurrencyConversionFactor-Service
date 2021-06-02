@@ -20,6 +20,13 @@ spring:
   jpa:
     database: h2
     database-platform: org.hibernate.dialect.H2Dialect
+  sleuth:
+    trace-id128: true
+    sampler:
+      probability: 1.0
+  zipkin:
+    enabled: true
+    base-url: ${zipkin.url:http://127.0.0.1:9411/}
 springdoc:
   swagger-ui:
     path: /swagger-ui.html
