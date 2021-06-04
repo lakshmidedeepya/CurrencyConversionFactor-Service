@@ -39,3 +39,8 @@ management:
       exposure:
         include:
         - "*"
+CurrencyConversion-service:
+  ribbon:
+    eureka:
+      enabled: true
+    ServerListRefreshInterval: 500
